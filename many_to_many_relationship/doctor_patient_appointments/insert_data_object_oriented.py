@@ -25,7 +25,7 @@ class Doctor:
         adapter.commit()
 
     @classmethod
-    def read_id(cls):
+    def random_doctor(cls):
         client.execute("Select * from doctors ORDER BY RAND() limit 1")
         result = client.fetchone()
         # print(result)
@@ -56,7 +56,7 @@ class Patient:
         adapter.commit()
 
     @classmethod
-    def read_id(cls):
+    def random_patient(cls):
         client.execute("Select * from patients ORDER BY RAND() limit 1")
         result = client.fetchone()
         columns = client.column_names
@@ -77,12 +77,15 @@ class Appointment:
         self.approval = fake_data.random_elements(elements=('Yes', 'No'), length=1, unique=False)
 
     def save(self):
-        sql_form = "INSERT INTO appointments (doctor_id, patient_id, concerned_problem, appointment_time, appointment_day, booking_status, approval) VALUES (%s,%s, %s, %s,%s,%s,%s)"
+        sql_form = "INSERT INTO appointments\
+                    (doctor_id, patient_id, concerned_problem, appointment_time, appointment_day, booking_status, approval) \
+                    VALUES (%s,%s, %s, %s,%s,%s,%s)"
         client.execute(sql_form, [
-            self.doctor_id, self.patient_id, self.concerned_problem, self.appointment_time, self.appointment_day, self.booking_status[0], self.approval[0]
+            self.doctor_id, self.patient_id, self.concerned_problem, self.appointment_time, 
+            self.appointment_day, self.booking_status[0], self.approval[0]
         ])        
         adapter.commit()
-
+    
     @classmethod
     def last(cls):
         client.execute("Select * from appointments order by id desc limit 1")
@@ -100,11 +103,11 @@ def insert_rows(row_count):
     for i in range(0, row_count):
         first_doctor = Doctor()    
         first_doctor.save()
-        doctor = Doctor.read_id()
+        doctor = Doctor.random_doctor()
 
         first_patient = Patient()    
         first_patient.save()
-        patient = Patient.read_id()
+        patient = Patient.random_patient()
 
         first_appointment = Appointment(doctor['id'], patient['id'])
         first_appointment.save()

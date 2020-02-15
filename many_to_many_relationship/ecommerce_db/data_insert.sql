@@ -4,10 +4,10 @@ USE practice_sql_db;
 
 -- Table user insert
 
-INSERT INTO user(firstname, lastname) VALUES ("vandana", "garg" );
-INSERT INTO user(firstname, lastname,email, user_status ) VALUES ("peeyush", "garg","peeyush.garg", 1 );
-INSERT INTO user(firstname, lastname,email, user_status ) VALUES ("vandana", "singla","vandana.singla", 2 );
-INSERT INTO user(firstname,lastname,email,encrypted_password,phone_number,user_status) VALUES ('peeyush', 'singla', 'peeyush@gmail.com', 'xyz', '+49' , 1 );
+INSERT INTO user(first_name, last_name,email) VALUES ("vandana", "garg" , "vg@gmail.com");
+INSERT INTO user(first_name, last_name,email, user_status ) VALUES ("peeyush", "garg","peeyush.garg", 1 );
+INSERT INTO user(first_name, last_name,email, user_status ) VALUES ("vandana", "singla","vandana.singla", 2 );
+INSERT INTO user(first_name,last_name,email,encrypted_password,phone_number,user_status) VALUES ('peeyush', 'singla', 'peeyush@gmail.com', 'xyz', '+49' , 1 );
 
 
 -- Table product insert
