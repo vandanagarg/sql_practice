@@ -17,9 +17,9 @@ def user_data(row_count):
         data_row.append(single_row)
     return data_row
 
-def insert_data():
-    row_data = user_data(2)
-    print(row_data)
+def insert_data(row_count):
+    row_data = user_data(row_count)
+    # print(row_data)
     insert_user(row_data)
 
-insert_data()
+insert_data(20)

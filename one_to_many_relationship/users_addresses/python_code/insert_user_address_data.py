@@ -28,7 +28,4 @@ def generate_row_data(current_user_id):
     # print(create_dummy_data)
     return create_dummy_data
 
-
-# INSERT INTO user_address (user_id, house_no, street_address,city,state_address,pin) VALUES (1,100, "ward 12", "Kurali","Punjab",140103);
-
 insert_data()

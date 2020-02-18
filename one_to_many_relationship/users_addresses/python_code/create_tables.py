@@ -32,7 +32,3 @@ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\
 INDEX (user_id,state_address, pin ),\
 FOREIGN KEY (user_id) REFERENCES user(id)\
 )" )
-
-
-# name = fake_data.name()
-# print(name)
