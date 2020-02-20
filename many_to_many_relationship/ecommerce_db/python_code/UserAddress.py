@@ -33,7 +33,7 @@ class UserAddress:
         adapter.commit()
 
     @classmethod
-    def last_address(cls):
+    def last(cls):
         client.execute("Select * from user_address order by id desc limit 1")
         result = client.fetchone()
         columns = client.column_names
@@ -42,5 +42,23 @@ class UserAddress:
             user_address_object[columns[i]] = result[i]            
         return user_address_object     
       
+    @classmethod
+    def random(cls):
+        client.execute("Select * from user_address ORDER BY RAND() limit 1")
+        result = client.fetchone()
+        # print(result)
+        columns = client.column_names
+        address_object = {}
+        for i in range(0, len(columns)):
+            address_object[columns[i]] = result[i]            
+        return address_object
       
-    
+    @classmethod
+    def find_by_user_id(cls,user_id):
+        client.execute(f"Select * from user_address where user_id = {user_id}")
+        result = client.fetchone()
+        columns = client.column_names
+        user_address_object = {}
+        for i in range(0, len(columns)):
+            user_address_object[columns[i]] = result[i]            
+        return user_address_object 

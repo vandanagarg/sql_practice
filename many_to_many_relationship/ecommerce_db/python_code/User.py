@@ -34,10 +34,21 @@ class User:
         adapter.commit()
 
     @classmethod
-    def random_user(cls):
+    def random(cls):
         client.execute("Select * from user ORDER BY RAND() limit 1")
         result = client.fetchone()
         # print(result)
+        columns = client.column_names
+        user_object = {}
+        for i in range(0, len(columns)):
+            user_object[columns[i]] = result[i]            
+        return user_object
+
+
+    @classmethod
+    def last(cls):
+        client.execute("Select * from user order by id desc limit 1")
+        result = client.fetchone()
         columns = client.column_names
         user_object = {}
         for i in range(0, len(columns)):
@@ -50,7 +61,7 @@ class User:
 #     user.save()
 
 
-# user1 = User.random_user()
+# user1 = User.random()
 # print(user1)
 
 

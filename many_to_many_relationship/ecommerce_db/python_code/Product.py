@@ -11,7 +11,7 @@ class Product:
       self.id = None
       self.product_name = fake_data.random_elements(elements=("flour","sugar", "shirts",
                            "TV","mobile","books", "coat","jeans","dresses","hard disk"
-                          "table", "chair","bottle","cosmetics"), length=1, unique=False)
+                          "table", "chair","bottle","cosmetics"), length=1, unique=True)
       self.category = self.product_name
       self.quantity = fake_data.random_digit_not_null()
       self.title = fake_data.lexify(text='???? ????? ???? ???',
@@ -36,7 +36,7 @@ class Product:
         adapter.commit()
 
     @classmethod
-    def random_product(cls):
+    def random(cls):
         client.execute("Select * from product ORDER BY RAND() limit 1")
         result = client.fetchone()
         # print(result)
@@ -45,6 +45,18 @@ class Product:
         for i in range(0, len(columns)):
             product_object[columns[i]] = result[i]            
         return product_object
+
+    @classmethod
+    def last(cls):
+        client.execute("Select * from product order by id desc limit 1")
+        result = client.fetchone()
+        columns = client.column_names
+        product_object = {}
+        for i in range(0, len(columns)):
+            product_object[columns[i]] = result[i]            
+        return product_object
+
+
 
 
 
